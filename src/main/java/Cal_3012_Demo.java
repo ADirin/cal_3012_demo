@@ -27,4 +27,7 @@ public class Cal_3012_Demo {
         }
         return a / b;
     }
+    public static double meanMe (double a, double b) {
+        return (a+b)/2;
+    }
 }

@@ -139,4 +139,64 @@ class Cal_3012_DemoTest {
     void divMe_parameterized(double a, double b, double expected) {
         assertEquals(expected, Cal_3012_Demo.divMe(a, b), DELTA);
     }
+
+
+
+    // ---------- meanMe ----------
+    @Test
+    @DisplayName("meanMe: averages two positive numbers")
+    void meanMe_positive() {
+        assertEquals(4.0, Cal_3012_Demo.meanMe(3.0, 5.0), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages two equal numbers returns the same value")
+    void meanMe_equalNumbers() {
+        assertEquals(2.5, Cal_3012_Demo.meanMe(2.5, 2.5), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages two negative numbers")
+    void meanMe_negative() {
+        assertEquals(-4.0, Cal_3012_Demo.meanMe(-3.0, -5.0), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages a positive and a negative number")
+    void meanMe_mixedSigns() {
+        assertEquals(1.0, Cal_3012_Demo.meanMe(-3.0, 5.0), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages with zero")
+    void meanMe_withZero() {
+        assertEquals(3.0, Cal_3012_Demo.meanMe(6.0, 0.0), DELTA);
+        assertEquals(3.0, Cal_3012_Demo.meanMe(0.0, 6.0), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages numbers that cancel out to zero")
+    void meanMe_cancellingNumbers() {
+        assertEquals(0.0, Cal_3012_Demo.meanMe(-5.0, 5.0), DELTA);
+    }
+
+    @Test
+    @DisplayName("meanMe: averages with decimals produces correct result")
+    void meanMe_decimals() {
+        assertEquals(2.5, Cal_3012_Demo.meanMe(2.0, 3.0), DELTA);
+        assertEquals(0.75, Cal_3012_Demo.meanMe(0.5, 1.0), DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "2.0, 4.0, 3.0",
+            "0.0, 0.0, 0.0",
+            "-2.0, -4.0, -3.0",
+            "1.0, 2.0, 1.5",
+            "10.0, 20.0, 15.0"
+    })
+    @DisplayName("meanMe: parameterized cases")
+    void meanMe_parameterized(double a, double b, double expected) {
+        assertEquals(expected, Cal_3012_Demo.meanMe(a, b), DELTA);
+    }
 }
