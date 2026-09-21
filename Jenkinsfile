@@ -6,10 +6,24 @@ pipeline {
     stages {
         stage ('check'){
             steps{
-                git ''
+                git 'https://github.com/ADirin/cal_3012_demo.git'
+            }
+        }
+        stage ('build'){
+            steps{
+                bat 'mvn clean install'
+            }
+        }
+
+        stage('test') {
+            steps{
+                bat 'mvn test'
+            }
+        }
+        stage('jacoco'){
+            steps{
+                jacoco()
             }
         }
     }
-
-
 }
