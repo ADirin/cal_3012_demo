@@ -1,16 +1,6 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven3'
-    }
-
-    environment {
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
-        DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
-        DOCKERHUB_REPO = 'amirdirin/cal1_3012_2026'
-        DOCKER_IMAGE_TAG = 'v1'
-    }
-    stages {
+        stages {
         stage ('check'){
             steps{
                 git 'https://github.com/ADirin/cal_3012_demo.git'
@@ -30,25 +20,6 @@ pipeline {
         stage('jacoco'){
             steps{
                 jacoco()
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
-                }
-            }
-        }
-
-
-        stage('Push Docker Image to Docker Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
-                    }
-                }
             }
         }
 
